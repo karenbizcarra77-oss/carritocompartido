@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito Compartido — Guía Operativa</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green-50: #E1F5EE; --green-100: #9FE1CB; --green-500: #1D9E75;
+    --green-700: #0F6E56; --green-900: #04342C;
+    --amber-50: #FAEEDA; --amber-200: #FAC775; --amber-800: #854F0B;
+    --red-50: #FCEBEB; --red-200: #F7C1C1; --red-700: #A32D2D;
+    --blue-50: #E6F1FB; --blue-200: #85B7EB; --blue-800: #0C447C;
+    --gray-50: #F7F6F3; --gray-100: #EDEBE5; --gray-200: #D3D1C7;
+    --gray-400: #888780; --gray-600: #5F5E5A; --gray-900: #1C1C1A;
+    --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--gray-50); color: var(--gray-900); line-height: 1.6; }
+
+  .page-header {
+    background: #fff; border-bottom: 1px solid var(--gray-100);
+    padding: 1rem 1.5rem; display: flex; align-items: center;
+    justify-content: space-between; position: sticky; top: 0; z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .logo-area { display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 34px; height: 34px; background: var(--green-500); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .logo-text { font-size: 15px; font-weight: 600; color: var(--gray-900); }
+  .logo-sub { font-size: 12px; color: var(--gray-400); }
+  .header-badge { font-size: 11px; font-weight: 500; background: var(--green-50); color: var(--green-700); border: 1px solid var(--green-100); border-radius: 20px; padding: 4px 12px; }
+
+  .wrap { max-width: 740px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+  .objetivo { background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
+  .objetivo p { font-size: 15px; color: var(--gray-600); line-height: 1.7; }
+  .objetivo strong { color: var(--gray-900); font-weight: 600; }
+
+  .video-section { margin-bottom: 1.5rem; }
+  .video-label { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--green-700); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .video-wrapper { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--green-100); background: #000; }
+  .video-wrapper iframe { display: block; width: 100%; height: 380px; border: none; }
+
+  .antes { background: var(--blue-50); border: 1px solid var(--blue-200); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+  .antes-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue-800); margin-bottom: 10px; }
+  .antes ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .antes ul li { background: #fff; border: 1px solid var(--blue-200); border-radius: var(--radius-md); padding: 6px 14px; font-size: 14px; color: var(--blue-800); font-weight: 500; }
+
+  .steps-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem; }
+  .step { background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; box-shadow: var(--shadow-sm); display: flex; gap: 16px; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--green-500); color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .step-content { flex: 1; }
+  .step-title { font-size: 16px; font-weight: 600; color: var(--gray-900); margin-bottom: 6px; }
+  .step-body { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin-bottom: 10px; }
+  .step-body strong { color: var(--gray-900); font-weight: 600; }
+
+  .action { background: #f0faf6; border: 1px solid var(--green-100); border-radius: var(--radius-md); padding: 10px 14px; font-size: 13px; color: var(--green-700); font-weight: 500; line-height: 1.6; margin-bottom: 8px; }
+  .warning { background: var(--amber-50); border: 1px solid var(--amber-200); border-radius: var(--radius-md); padding: 10px 14px; font-size: 13px; color: var(--amber-800); line-height: 1.6; margin-bottom: 8px; }
+  .danger { background: var(--red-50); border: 1px solid var(--red-200); border-radius: var(--radius-md); padding: 10px 14px; font-size: 13px; color: var(--red-700); line-height: 1.6; margin-bottom: 8px; }
+
+  code { font-family: 'DM Mono', monospace; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 7px 12px; font-size: 13px; display: block; word-break: break-all; margin: 6px 0 8px; }
+
+  .cliente { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+  .cliente-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-400); margin-bottom: 10px; }
+  .cliente ol { padding-left: 1.25rem; }
+  .cliente ol li { font-size: 14px; color: var(--gray-600); padding: 4px 0; line-height: 1.6; }
+
+  .card { background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
+  .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-400); margin-bottom: 12px; }
+
+  .checklist { list-style: none; border: 1px solid var(--gray-100); border-radius: var(--radius-md); overflow: hidden; }
+  .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border-bottom: 1px solid var(--gray-100); font-size: 13px; color: var(--gray-600); background: #fff; }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li input { margin-top: 2px; flex-shrink: 0; accent-color: var(--green-500); cursor: pointer; }
+  .checklist li label { cursor: pointer; }
+  .checklist li.checked label { text-decoration: line-through; color: var(--gray-400); }
+  .checklist li.checked { background: var(--green-50); }
+
+  .errores-list { list-style: none; }
+  .errores-list li { display: flex; gap: 10px; font-size: 14px; color: var(--gray-600); padding: 8px 0; border-bottom: 1px solid var(--gray-100); line-height: 1.6; }
+  .errores-list li:last-child { border-bottom: none; }
+  .err-x { color: var(--red-700); font-weight: 700; flex-shrink: 0; }
+
+  .machete { background: var(--green-900); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+  .machete-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--green-100); margin-bottom: 12px; }
+  .machete-steps { display: flex; flex-wrap: wrap; gap: 8px; }
+  .machete-step { font-size: 12px; font-weight: 500; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-sm); padding: 5px 11px; color: #fff; }
+
+  footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--gray-400); }
+
+  @media (max-width: 480px) {
+    .video-wrapper iframe { height: 220px; }
+    .step { flex-direction: column; gap: 10px; }
+    .antes ul { flex-direction: column; }
+    .header-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="logo-area">
+    <div class="logo-icon">🛒</div>
+    <div>
+      <div class="logo-text">Carrito Compartido</div>
+      <div class="logo-sub">Guía operativa para agentes</div>
+    </div>
+  </div>
+  <span class="header-badge">Todos los negocios</span>
+</header>
+
+<div class="wrap">
+
+  <div class="objetivo">
+    <p><strong>¿Cuándo usarlo?</strong> Aplicalo en las casuísticas que más generan recompra: <strong>Necesito ayuda</strong>, <strong>Tu Farmacity</strong> y <strong>Quiero anular</strong>.</p>
+    <p style="margin-top:8px;"><strong>¿Qué es el carrito compartido?</strong> Armás un carrito con los productos que quiere el cliente y le enviás un link único para que solo tenga que ingresar, revisar y confirmar su compra.</p>
+  </div>
+
+  <div class="video-section">
+    <div class="video-label">🎥 Video explicativo</div>
+    <div class="video-wrapper">
+      <iframe src="https://drive.google.com/file/d/1byWCigHa3b7fdA4BPFrgn7mmC79dWJRC/preview" allow="autoplay"></iframe>
+    </div>
+  </div>
+
+  <div class="antes">
+    <p class="antes-title">💡 Antes de empezar — confirmá con el cliente</p>
+    <ul>
+      <li>📍 Dirección o código postal</li>
+      <li>🚚 Envío a domicilio o retiro en sucursal</li>
+      <li>🕵️ Siempre operá desde ventana de incógnito</li>
+    </ul>
+  </div>
+
+  <div class="steps-grid">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <p class="step-title">Regionalizate</p>
+        <p class="step-body">Entrá al sitio del formato correspondiente y cargá el código postal o dirección del cliente. Confirmá el método de entrega. Así asegurás ver solo productos disponibles en su zona.</p>
+        <div class="action">➡️ Ingresá la dirección → seleccioná retiro o envío → verificá que los productos correspondan a su zona.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <p class="step-title">Armá el carrito</p>
+        <p class="step-body">Cargá los productos que el cliente quiere según su región. Solo agregá productos disponibles para esa zona.</p>
+        <div class="warning">⚠️ Si un producto no aparece en la búsqueda, no está disponible para esa zona. Avisale al cliente.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <p class="step-title">Activá el modo Social Selling</p>
+        <p class="step-body">En la barra del navegador, al final de la URL agregá exactamente esto y presioná Enter:</p>
+        <code>/checkout/?socialselling=on#/cart</code>
+        <p class="step-body">Se habilita el menú lateral para compartir el carrito.</p>
+        <div class="danger">🔴 Si algo falla, cerrá la pestaña y empezá desde el paso 1.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <p class="step-title">Ingresá tu legajo</p>
+        <p class="step-body">En "Agregar código de vendedor", ingresá tu legajo <strong>sin puntos ni guiones</strong>. Si el cliente tiene cupón, ingresalo y verificá que se aplique.</p>
+        <div class="warning">⚠️ Ejemplo: si tu legajo es 12.345-6, ingresalo como 123456.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <p class="step-title">Compartí el link</p>
+        <p class="step-body">Copiá el enlace del carrito y enviáselo al cliente con estas instrucciones:</p>
+        <div class="action">📋 "Abrí el link desde una ventana de incógnito, regionalizate con la misma dirección que me diste, iniciá sesión y finalizá la compra normalmente."</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cliente">
+    <p class="cliente-title">🧾 Lo que hace el cliente</p>
+    <ol>
+      <li>Abre el link desde una ventana de incógnito</li>
+      <li>Se regionaliza con la misma dirección indicada</li>
+      <li>Inicia sesión y finaliza la compra normalmente</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <p class="section-title">✅ Checklist rápido</p>
+    <ul class="checklist">
+      <li><input type="checkbox" id="c1"><label for="c1">Confirmé zona y método de entrega</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">Estoy regionalizado correctamente</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">Todos los productos son válidos para la zona</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">Activé Social Selling</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">Cargué mi legajo sin puntos ni guiones</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">Apliqué el cupón si había uno</label></li>
+      <li><input type="checkbox" id="c7"><label for="c7">Envié el link con instrucciones de incógnito</label></li>
+      <li><input type="checkbox" id="c8"><label for="c8">Vacié el carrito al finalizar</label></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="section-title">🚫 Errores frecuentes a evitar</p>
+    <ul class="errores-list">
+      <li><span class="err-x">✕</span><span>No abrir desde incógnito — genera conflictos con sesiones activas.</span></li>
+      <li><span class="err-x">✕</span><span>No regionalizarse antes de cargar productos — puede haber ítems no disponibles.</span></li>
+      <li><span class="err-x">✕</span><span>Ingresar el legajo con puntos o guiones — la venta no queda registrada.</span></li>
+      <li><span class="err-x">✕</span><span>No avisar al cliente que use incógnito — la compra puede fallar.</span></li>
+      <li><span class="err-x">✕</span><span>No limpiar el carrito — el próximo cliente puede ver productos del anterior.</span></li>
+    </ul>
+  </div>
+
+  <div class="machete">
+    <p class="machete-title">⚡ Machete operativo</p>
+    <div class="machete-steps">
+      <span class="machete-step">1. Confirmá zona + entrega</span>
+      <span class="machete-step">2. Incógnito → regionalizate</span>
+      <span class="machete-step">3. Cargá productos válidos</span>
+      <span class="machete-step">4. URL + /checkout/?socialselling=on#/cart</span>
+      <span class="machete-step">5. Legajo sin . ni -</span>
+      <span class="machete-step">6. Cupón si aplica</span>
+      <span class="machete-step">7. Link + instrucciones al cliente</span>
+      <span class="machete-step">8. Limpiá el carrito</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>Guía operativa interna — Carrito Compartido · Todos los negocios</footer>
+
+<script>
+  document.addEventListener('change', function(e) {
+    if (e.target.type === 'checkbox') {
+      const li = e.target.closest('li');
+      if (li) li.classList.toggle('checked', e.target.checked);
+    }
+  });
+</script>
+</body>
+</html>
